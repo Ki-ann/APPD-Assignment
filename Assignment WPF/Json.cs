@@ -12,34 +12,34 @@ namespace Assignment_WPF
     class Json
     {
 
-        private static string exeFolder = System.IO.Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory);
-        public static void serialize(object input)
+        private static string exeFolder = Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory);
+
+        public static void SerializeItems(object input, string fileName)
         {
             JsonSerializer serializer = new JsonSerializer();
             serializer.NullValueHandling = NullValueHandling.Ignore;
-            using (StreamWriter sw = new StreamWriter(exeFolder + "\\json.json"))
+            using (StreamWriter sw = new StreamWriter(exeFolder + fileName))
             using (JsonWriter writer = new JsonTextWriter(sw))
             {
                 serializer.Serialize(writer, input);
             }
         }
-        public static List<Item> LoadJson()
+        public static dynamic DeserializeItems(object output, string fileName)
         {
-            
-            using (StreamReader sw = new StreamReader(exeFolder + "\\json.json"))
+            using (StreamReader sw = new StreamReader(exeFolder + fileName))
             {
                 string json =sw.ReadToEnd();
-                Data.items = JsonConvert.DeserializeObject<List<Item>>(json);
+                output = JsonConvert.DeserializeObject(json);
             }
-            return Data.items;
-
+            return output;
         }
+
        
-        public static void clearJson()
+        public static void ClearItems()
         {
             var blank = new List<Item>();
             JsonSerializer serializer = new JsonSerializer();
-            using (StreamWriter sw = new StreamWriter(exeFolder + "\\json.json"))
+            using (StreamWriter sw = new StreamWriter(exeFolder + @"\json.json"))
             using (JsonWriter writer = new JsonTextWriter(sw))
             {
                 serializer.Serialize(writer, blank);                //outputs [] blank

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Assignment_WPF.Data;
+using MahApps.Metro.Controls;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -21,32 +23,36 @@ namespace Assignment_WPF
     /// </summary>
     public partial class MainWindow : Window
     {
+
         public static Brush theme;
+        public BookingSystemManager _bookingManager; //data variable is used to represent the entire file content
+        public Order _currentOrder;
         public MainWindow()
         {
             InitializeComponent();
+            _bookingManager = new BookingSystemManager();
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
-            Json.LoadJson();
-            frame.Source = new Uri("Home.xaml", UriKind.RelativeOrAbsolute);
+            // Data.items = Json.DeserializeItems(Data.items, @"\json.json").ToObject<List<Item>>();
+            Loaded += MainWindow_Loaded;
+            frame.Source = new Uri("/Pages/Home.xaml", UriKind.RelativeOrAbsolute);
             cmbColors.ItemsSource = typeof(Brushes).GetProperties();
             //initial screen
         }
-
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            Application.Current.MainWindow = this;
+        }//end of MainWindow_loaded
         private void btnHome_Click(object sender, RoutedEventArgs e)
         {
-            frame.NavigationService.Navigate(new Uri("Home.xaml", UriKind.Relative));           //navigate to Home.xaml
+            frame.NavigationService.Navigate(new Uri("/Pages/Home.xaml", UriKind.Relative));           //navigate to Home.xaml
         }
 
         private void btnStore_Click(object sender, RoutedEventArgs e)
         {
-            frame.NavigationService.Navigate(new Uri("Store.xaml", UriKind.Relative));          //navigate to Store.xaml
+            frame.NavigationService.Navigate(new Uri("/Pages/Store.xaml", UriKind.Relative));          //navigate to Store.xaml
         }
 
-        private void btnCart_Click(object sender, RoutedEventArgs e)
-        {
-            frame.NavigationService.Navigate(new Uri("Cart.xaml", UriKind.Relative));           //navigate to Cart.xaml
-        }
-
+        
         private void cmbColors_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             theme = (Brush)(cmbColors.SelectedItem as PropertyInfo).GetValue(null, null);
