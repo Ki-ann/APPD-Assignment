@@ -1,19 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using Assignment_WPF.Data;
 
 namespace Assignment_WPF
@@ -75,8 +63,8 @@ namespace Assignment_WPF
         {
             int collectedItemId = Int32.Parse(((Button)sender).Tag.ToString());
             Button button = (Button)sender;
-            NavigationService.Navigate(new Uri("/Pages/Cleaner.xaml", UriKind.Relative));
-            Cleaner._itemId = collectedItemId;
+            NavigationService.Navigate(new Cleaner(collectedItemId));
+            
         }//end of button_Click
     }
 }

@@ -84,14 +84,21 @@
     </ApplicationDefinition>
     <Compile Include="Data\BaseDataAccess.cs" />
     <Compile Include="Data\BookingSystemManager.cs" />
+    <Compile Include="Pages\Cart.xaml.cs">
+      <DependentUpon>Cart.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Cleaner.xaml.cs">
       <DependentUpon>Cleaner.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Item.cs" />
-    <Compile Include="Json.cs" />
+    <Compile Include="Models\Item.cs" />
+    <Compile Include="Models\Json.cs" />
     <Compile Include="Pages\Store.xaml.cs">
       <DependentUpon>Store.xaml</DependentUpon>
     </Compile>
+    <Page Include="Pages\Cart.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Pages\Cleaner.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

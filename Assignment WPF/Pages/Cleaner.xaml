@@ -9,34 +9,40 @@
       d:DesignWidth="500">
 
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
         <TextBlock Name="itemNameTextBlock"
                    Width="200"
-                   Height="30"
+                   Height="60"
+                   FontSize="24"
                    Grid.Row="0"
-                   HorizontalAlignment="Left"
-                   Margin="150,15,0,355" />
-        <TextBlock x:Name="textBlock"
-                   HorizontalAlignment="Left"
-                   Margin="63,45,0,0"
-                   TextWrapping="Wrap"
-                   VerticalAlignment="Top"
-                   Height="63"
-                   Width="356"
-                   FontSize="48">
-            <Run Text="C"
-                 TextDecorations="Underline" /><Run Text="l"
-                                                    TextDecorations="Underline" /><Run Text="eaner"
-                                                                                       TextDecorations="Underline" /><Run Text=" booking"
-                                                                                                                          TextDecorations="Underline" /></TextBlock>
+                   Grid.Column="0"
+                   Grid.ColumnSpan="2"
+                   VerticalAlignment="Bottom"
+                   HorizontalAlignment="Center" />
+
         <DatePicker x:Name="Date"
+                    Grid.Row="1"
+                    Grid.Column="1"
                     HorizontalAlignment="Left"
-                    Margin="239,127,0,0"
                     VerticalAlignment="Top"
                     FontSize="14"
                     SelectedDateChanged="Date_SelectedDateChanged" />
         <TextBlock x:Name="textBlock2"
                    HorizontalAlignment="Left"
-                   Margin="150,127,0,0"
+                   Grid.Row="1"
+                   Grid.Column="0"
                    TextWrapping="Wrap"
                    VerticalAlignment="Top"
                    Text="Date:"
@@ -44,14 +50,16 @@
                    Height="22" />
         <TextBlock x:Name="textBlock3"
                    HorizontalAlignment="Left"
-                   Margin="150,176,0,0"
+                   Grid.Row="2"
+                   Grid.Column="0"
                    TextWrapping="Wrap"
                    VerticalAlignment="Top"
                    Text="Time:"
                    FontSize="18" />
         <ComboBox x:Name="Time"
                   HorizontalAlignment="Left"
-                  Margin="239,170,0,0"
+                  Grid.Row="2"
+                  Grid.Column="1"
                   VerticalAlignment="Top"
                   Width="120"
                   FontSize="18">
@@ -66,23 +74,27 @@
             <ComboBoxItem Content="18:00-19:00" />
         </ComboBox>
         <TextBlock x:Name="textBlock1"
+                   Grid.Row="3"
+                   Grid.Column="0"
                    HorizontalAlignment="Left"
-                   Margin="125,219,0,0"
                    TextWrapping="Wrap"
                    VerticalAlignment="Top"
-                   Height="23"><Run FontSize="18"
-                                    Text="Address" /><Run Text=":" /><LineBreak /><Run Text="" /></TextBlock>
+                   Height="23"
+                   Text="Address"
+                   FontSize="18" />
         <TextBox x:Name="Address"
                  HorizontalAlignment="Left"
                  Height="23"
-                 Margin="239,219,0,0"
+                 Grid.Row="3"
+                 Grid.Column="1"
                  TextWrapping="Wrap"
                  VerticalAlignment="Top"
                  Width="219"
                  FontSize="18" />
         <TextBlock x:Name="textBlock4"
                    HorizontalAlignment="Left"
-                   Margin="96,265,0,0"
+                   Grid.Row="4"
+                   Grid.Column="0"
                    TextWrapping="Wrap"
                    Text="Postal code:"
                    VerticalAlignment="Top"
@@ -90,20 +102,33 @@
         <TextBox x:Name="PstlCd"
                  HorizontalAlignment="Left"
                  Height="23"
-                 Margin="239,266,0,0"
+                 Grid.Row="4"
+                 Grid.Column="1"
                  TextWrapping="Wrap"
                  VerticalAlignment="Top"
                  Width="120"
                  FontSize="18"
                  MaxLength="6" />
+        <TextBlock x:Name="textBlock5"
+                   HorizontalAlignment="Left"
+                   Grid.Row="5"
+                   Grid.Column="0"
+                   TextWrapping="Wrap"
+                   Text="Item Details:"
+                   VerticalAlignment="Top"
+                   FontSize="18" />
         <ComboBox Name="rentalOptionComboBoxInput"
                   SelectedValuePath="RentalId"
                   SelectedValue="{Binding Path=Rental}"
-                  Margin="217,302,10,72">
+                  Grid.Row="5"
+                  Grid.Column="1"
+                  Height="36"
+                  VerticalAlignment="top">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock>
-                <Run Text="{Binding RentalType}" />
+                    <TextBlock TextWrapping="Wrap">
+                 <Run Text="{Binding RentalType}" />
+                        <LineBreak />
                 <Run Text="( SGD " />
                 <Run Text="{Binding RentalPrice}" />
                 <Run Text=")" />
@@ -113,20 +138,24 @@
         </ComboBox>
         <Button x:Name="btnAddtoCrt"
                 Content="Add to cart"
-                HorizontalAlignment="Left"
-                Margin="181,333,0,0"
+                HorizontalAlignment="Right"
+                Grid.Row="6"
+                Grid.Column="0"
                 VerticalAlignment="Top"
-                Width="106"
-                Height="57"
-                FontSize="16" />
+                Width="120"
+                Height="60"
+                FontSize="16"
+                Click="btnAddtoCrt_Click" />
         <Button x:Name="button"
                 Content="Go to cart"
                 HorizontalAlignment="Left"
-                Height="43"
-                Margin="364,335,0,-28"
+                Width="120"
+                Height="60"
+                Grid.Row="6"
+                Grid.Column="1"
                 VerticalAlignment="Top"
-                Width="107"
-                FontSize="16" />
+                FontSize="16"
+                Click="button_Click" />
 
     </Grid>
 </Page>

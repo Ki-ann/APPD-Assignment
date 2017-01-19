@@ -24,19 +24,18 @@ namespace Assignment_WPF
     public partial class MainWindow : Window
     {
 
-        public static Brush theme;
+        public Brush theme;
         public BookingSystemManager _bookingManager; //data variable is used to represent the entire file content
         public Order _currentOrder;
         public MainWindow()
         {
             InitializeComponent();
             _bookingManager = new BookingSystemManager();
-            WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
-            // Data.items = Json.DeserializeItems(Data.items, @"\json.json").ToObject<List<Item>>();
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
             Loaded += MainWindow_Loaded;
-            frame.Source = new Uri("/Pages/Home.xaml", UriKind.RelativeOrAbsolute);
+            frame.NavigationService.Navigate(new Home());   //initial screen
             cmbColors.ItemsSource = typeof(Brushes).GetProperties();
-            //initial screen
+            
         }
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
@@ -44,21 +43,25 @@ namespace Assignment_WPF
         }//end of MainWindow_loaded
         private void btnHome_Click(object sender, RoutedEventArgs e)
         {
-            frame.NavigationService.Navigate(new Uri("/Pages/Home.xaml", UriKind.Relative));           //navigate to Home.xaml
+            frame.NavigationService.Navigate(new Home());           //navigate to Home.xaml
         }
 
         private void btnStore_Click(object sender, RoutedEventArgs e)
         {
-            frame.NavigationService.Navigate(new Uri("/Pages/Store.xaml", UriKind.Relative));          //navigate to Store.xaml
+            frame.NavigationService.Navigate(new Store());          //navigate to Store.xaml
         }
 
-        
+        private void btnCart_Click(object sender, RoutedEventArgs e)
+        {
+            frame.NavigationService.Navigate(new Cart());
+        }
         private void cmbColors_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             theme = (Brush)(cmbColors.SelectedItem as PropertyInfo).GetValue(null, null);
             bgBox.Background = theme;
             
         }
+
 
     }
 

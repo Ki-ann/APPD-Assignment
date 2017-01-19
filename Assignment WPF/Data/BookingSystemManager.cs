@@ -83,8 +83,6 @@ namespace Assignment_WPF.Data
         public Boolean SaveOrderAndOrderDetails(Order inOrder)
         {
             List<DbParameter> parameterList = new List<DbParameter>();
-        
-            
             //Assuming a user (CINDY) logon and placed the order
             parameterList.Add(base.GetParameter("inUserId",inOrder.OrderedBy ));
 

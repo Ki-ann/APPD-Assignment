@@ -12,7 +12,8 @@
                  Rows="5"
                  Columns="2"
                  Grid.Column="0"
-                 Grid.Row="1">
+                 Grid.Row="1"
+                 >
         <TextBlock x:Name="textBlock"
                    Width="150"
                    HorizontalAlignment="Right"

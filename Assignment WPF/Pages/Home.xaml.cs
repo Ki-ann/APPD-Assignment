@@ -27,7 +27,8 @@ namespace Assignment_WPF
 
         private void btnStore2_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new Uri("/Pages/Store.xaml", UriKind.Relative));
+            NavigationService.Navigate(new Store());
+            //NavigationService.Navigate(new Uri("/Pages/Store.xaml", UriKind.Relative));
 
         }
     }
