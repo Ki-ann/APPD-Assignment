@@ -24,7 +24,7 @@ namespace Assignment_WPF
     public partial class MainWindow : Window
     {
 
-        public Brush theme;
+        public static Brush theme; 
         public BookingSystemManager _bookingManager; //data variable is used to represent the entire file content
         public Order _currentOrder;
         public MainWindow()

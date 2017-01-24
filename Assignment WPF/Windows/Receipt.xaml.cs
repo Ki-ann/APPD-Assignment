@@ -19,25 +19,26 @@ namespace Assignment_WPF
     /// </summary>
     public partial class Receipt : Window
     {
-        double totalPrice = Thankyou.BackPrice.Sum();
         
-        public Receipt()
+        
+        public Receipt(decimal totalPrice,string description)
         {
             InitializeComponent();
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             bgBox.Background = MainWindow.theme;
-            textBox.Text += "Customer Name: " + Thankyou.FName[0] + " " + Thankyou.LName[0] + Environment.NewLine + Environment.NewLine;
-            textBox.Text += "---------------------------------------------------" + Environment.NewLine;
-            textBox.Text += "Service Booked: " + Environment.NewLine + Environment.NewLine;
-            for (int i = 0; i < Thankyou.BackNames.Length; i++)
-            {
-                textBox.Text += Thankyou.BackNames[i] + Environment.NewLine;
-                textBox.Text += Thankyou.BackDesc[i] + Environment.NewLine;
-                textBox.Text += "Date:\t" + Thankyou.BackDate[i] + Environment.NewLine;
-                textBox.Text += "Time:\t" + Thankyou.BackTime[i] + Environment.NewLine;
-                textBox.Text += String.Format("Price:\t${0:f2}" + Environment.NewLine, Thankyou.BackPrice[i]);
-                textBox.Text += Environment.NewLine;
-            }
+            textBox.Text += description + Environment.NewLine;
+            //textBox.Text += "Customer Name: " + Thankyou.FName[0] + " " + Thankyou.LName[0] + Environment.NewLine + Environment.NewLine;
+            //textBox.Text += "---------------------------------------------------" + Environment.NewLine;
+            //textBox.Text += "Service Booked: " + Environment.NewLine + Environment.NewLine;
+            //for (int i = 0; i < Thankyou.BackNames.Length; i++)
+            //{
+            //    textBox.Text += Thankyou.BackNames[i] + Environment.NewLine;
+            //    textBox.Text += Thankyou.BackDesc[i] + Environment.NewLine;
+            //    textBox.Text += "Date:\t" + Thankyou.BackDate[i] + Environment.NewLine;
+            //    textBox.Text += "Time:\t" + Thankyou.BackTime[i] + Environment.NewLine;
+            //    textBox.Text += String.Format("Price:\t${0:f2}" + Environment.NewLine, Thankyou.BackPrice[i]);
+            //    textBox.Text += Environment.NewLine;
+            //}
 
             textBox.Text += "---------------------------------------------------" + Environment.NewLine;
             textBox.Text += String.Format("Total Price: ${0:f2}" + Environment.NewLine, totalPrice);

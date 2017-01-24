@@ -29,6 +29,7 @@ namespace Assignment_WPF
         //string[] cartTime;
         //string[] cartAddress;
         //int[] cartPstlCd;
+        decimal totalPrice = 0;
         public Cart()
         {
             
@@ -39,7 +40,6 @@ namespace Assignment_WPF
             Order order = mainWindow._currentOrder;
             BookingSystemManager bookingManager = mainWindow._bookingManager;
             InitializeComponent();
-            decimal totalPrice = 0;
             textTotalPrice.Text = "0";
             if (order == null)
             {
@@ -76,8 +76,13 @@ namespace Assignment_WPF
 
         private void Clear_Cart_Click(object sender, RoutedEventArgs e)
         {
+            //Set reference to the MainWindow instance
+            MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
             contentStackPanel.Children.Clear();
             textTotalPrice.Text = "0";
+            mainWindow._bookingManager = new BookingSystemManager();
+            mainWindow._currentOrder = new Order();
+            NavigationService.Refresh();
         }
 
         private void CheckOut_Click(object sender, RoutedEventArgs e)
@@ -89,7 +94,7 @@ namespace Assignment_WPF
             BookingSystemManager bookingManager = mainWindow._bookingManager;
             bookingManager.SaveOrderAndOrderDetails(order);
             MessageBox.Show("You have successfully booked our cleaning services.");
-            //NavigationService.Navigate(new Uri("Payment.xaml", UriKind.Relative));
+            NavigationService.Navigate(new Thankyou(totalPrice,contentStackPanel));
         }
 
     }
