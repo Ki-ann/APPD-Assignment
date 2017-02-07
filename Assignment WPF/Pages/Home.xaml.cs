@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static Assignment_WPF.Data.EFModels;
 
 namespace Assignment_WPF
 {
@@ -23,11 +24,19 @@ namespace Assignment_WPF
         public Home()
         {
             InitializeComponent();
+            using(var context = new AppContext())
+            {
+                textBlock.Text = String.Empty;
+                foreach(var item in context.Item)
+                {
+                    textBlock.Text += item.ItemName;
+                }
+            }
         }
 
         private void btnStore2_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new Store());
+            //NavigationService.Navigate(new Store());
             //NavigationService.Navigate(new Uri("/Pages/Store.xaml", UriKind.Relative));
 
         }
