@@ -3,6 +3,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
 using Assignment_WPF.Data;
+using static Assignment_WPF.Data.EFModels;
+using System.Collections.Generic;
 
 namespace Assignment_WPF
 {
@@ -20,51 +22,59 @@ namespace Assignment_WPF
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            //(MainWindow) this.Parent = Means I telling the .NET engine that
-            //this.Parent is actually a MainWindow class instance.
-            //So that I can use with the MainWindow instance's bookingManager object.
-            // The following code works to get the MainWindow instance. The following code
-            // was used when I quickily whip out the code during lesson without any thoughts of refining it.
-            // var bookingManager = ((MainWindow)((Grid)((ContentControl)this.Parent).Parent).Parent).bookingManager;
-            //http://stackoverflow.com/questions/22856745/wpf-get-parent-window
-            MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
-            BookingSystemManager bookingManager = mainWindow._bookingManager;
-            foreach (Item oneItem in bookingManager.Items)
+            Grid btnGrid = new Grid();
+            ColumnDefinition c0 = new ColumnDefinition();
+            ColumnDefinition c1 = new ColumnDefinition();
+            btnGrid.ColumnDefinitions.Add(c0);
+            btnGrid.ColumnDefinitions.Add(c1);              //Grid with 2 columns of same width
+            sv.Content = btnGrid;                           //wrap grid with scrollviewer
+            using (var context = new AppContext())          //Connection to database
             {
-                Button button = new Button()
+                int _buttonCount = 0;       //no. of buttons to create
+                List<string> categoryNameList = new List<string>();
+                foreach (var category in context.Category)
                 {
-                    Tag = oneItem.ItemId
-                };//end of button creation
-                button.Click += new RoutedEventHandler(button_Click);
-                StackPanel stackPanel = new StackPanel();
-                //http://stackoverflow.com/questions/350027/setting-wpf-image-source-in-code
-
-                // var uriSource = new Uri("/BookingSystemCA1;component/" + data.ItemTypes[itemTypeIndex].ItemTypeImageFileName, UriKind.Relative);
-                TextBlock textBlock = new TextBlock()
+                    _buttonCount++;
+                    categoryNameList.Add(category.CategoryName);
+                }
+                for (int x = 0; x < _buttonCount / 2; x++)          //no.of rows of same width to define
                 {
-                    Text = string.Format("{0}", oneItem.ItemName),
-                    HorizontalAlignment = HorizontalAlignment.Center
-                };
-                stackPanel.Children.Add(textBlock);
-                button.Content = stackPanel;
-                //I anyhow trial and error. Mouse hover the Margin property gave me a lot of hints on how to set
-                //margin.
-                button.Margin = new System.Windows.Thickness { Top = 3, Bottom = 3, Left = 3, Right = 3 };
-                this.itemButtonsUniformGrid.Children.Add(button);
-            }//end of for loop
+                    RowDefinition rowDef = new RowDefinition();
+                    rowDef.Height = new GridLength((sp.Height / 2)-1);
+                    btnGrid.RowDefinitions.Add(rowDef);
+                }
+                int _buttonNo = 0;                                  //Button tag
+                for (int i = 0; i < _buttonCount - (_buttonCount / 2); i++) //Start of row loop
+                {
+                    for (int j = 0; j < 2; j++)                         //Start of column loop
+                    {
 
-        }
-        public void UtilizeState(object state)
-        {  
-            throw new NotImplementedException();
+                        Button newBtn = new Button()                //New Button object
+                        {
+                            Tag = _buttonNo
+                        };
+
+                        newBtn.Content = categoryNameList[_buttonNo];
+                        newBtn.Name = "Button" + _buttonNo.ToString();
+                        newBtn.HorizontalAlignment = HorizontalAlignment.Stretch;
+                        newBtn.VerticalAlignment = VerticalAlignment.Stretch;
+                        newBtn.Click += new RoutedEventHandler(button_Click);
+                        btnGrid.Children.Add(newBtn);
+                        Grid.SetRow(newBtn, i);
+                        Grid.SetColumn(newBtn, j);
+                        _buttonNo++;
+                    }//end of column loop
+                }//end of row loop
+            }//end of using
+
         }
 
         void button_Click(object sender, RoutedEventArgs e)
         {
             int collectedItemId = Int32.Parse(((Button)sender).Tag.ToString());
-            Button button = (Button)sender;
-            NavigationService.Navigate(new Cleaner(collectedItemId));
-            
+            MessageBox.Show(collectedItemId.ToString());
+            // NavigationService.Navigate(new Cleaner(collectedItemId));
+
         }//end of button_Click
     }
 }
