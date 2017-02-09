@@ -94,6 +94,7 @@ namespace Assignment_WPF.Pages
                 order.TimeSlotIn = TimeIn.Text;
                 order.TimeSlotOut = TimeOut.Text;
                 order.ReservedAddress = Address.Text;
+                order.ReservedPostal = PstlCd.Text;
                 bookingOrder.BookingList.Add(order);
                 mainWindow._currentBooking = bookingOrder;
                 MessageBox.Show("You have added one reservation into your cart");

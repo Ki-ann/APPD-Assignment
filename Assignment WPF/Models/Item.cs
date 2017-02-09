@@ -55,6 +55,8 @@ namespace Assignment_WPF
         public DateTime? ReservedDate { get; set; }
         [Required]
         public string ReservedAddress { get; set; }
+        [Required]
+        public string ReservedPostal { get; set; }
     }
 
 

@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace Assignment_WPF.Pages
@@ -18,10 +19,12 @@ namespace Assignment_WPF.Pages
             _Panel = stackpanel;
             foreach(StackPanel child in _Panel.Children)
             {
-                foreach (TextBlock tb in (StackPanel)(_Panel.Children))
+                foreach (object tb in child.Children)
                 {
-                    StackPanel item = (TextBlock)child;
-                    _description += item.Text + "\n";
+                    if (tb.GetType() == typeof(TextBlock))
+                    {
+                        _description += ((TextBlock)tb).Text + "\n";
+                    }
                 }
             }
         }

@@ -29,11 +29,17 @@ namespace Assignment_WPF.Migrations
                     b.Property<string>("ReservedAddress")
                         .IsRequired();
 
-                    b.Property<DateTime>("ReservedDate");
+                    b.Property<DateTime?>("ReservedDate")
+                        .IsRequired();
 
-                    b.Property<DateTime>("TimeSlotIn");
+                    b.Property<string>("ReservedPostal")
+                        .IsRequired();
 
-                    b.Property<DateTime>("TimeSlotOut");
+                    b.Property<string>("TimeSlotIn")
+                        .IsRequired();
+
+                    b.Property<string>("TimeSlotOut")
+                        .IsRequired();
 
                     b.Property<int>("UserId");
 

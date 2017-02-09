@@ -56,7 +56,7 @@ namespace Assignment_WPF.Pages
                     messageTextBlock.Text += string.Format("Price : {0}\n", itemPrice);
                     messageTextBlock.Text += string.Format("Booked Date : {0}\n", booking.ReservedDate);
                     messageTextBlock.Text += string.Format("TimeSlot : {0}-{1}\n", booking.TimeSlotIn, booking.TimeSlotOut);
-                    messageTextBlock.Text += string.Format("Service Address : {0}\n", booking.ReservedAddress);
+                    messageTextBlock.Text += string.Format("Service Address : {0} {1}\n", booking.ReservedAddress, booking.ReservedPostal);
                     Button btn = new Button()
                     {
 
@@ -110,7 +110,8 @@ namespace Assignment_WPF.Pages
                 }
             }
             MessageBox.Show("You have successfully booked our cleaning services.");
-            //NavigationService.Navigate(new Thankyou(totalPrice,contentStackPanel));
+            this.mainWindow._currentBooking = new BookingOrder();
+            NavigationService.Navigate(new Thankyou(totalPrice,contentStackPanel));
         }
 
 

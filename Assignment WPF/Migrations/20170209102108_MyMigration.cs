@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Assignment_WPF.Migrations
 {
-    public partial class MinMigration : Migration
+    public partial class MyMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -19,8 +19,9 @@ namespace Assignment_WPF.Migrations
                     ItemId = table.Column<int>(nullable: false),
                     ReservedAddress = table.Column<string>(nullable: false),
                     ReservedDate = table.Column<DateTime>(nullable: false),
-                    TimeSlotIn = table.Column<DateTime>(nullable: false),
-                    TimeSlotOut = table.Column<DateTime>(nullable: false),
+                    ReservedPostal = table.Column<string>(nullable: false),
+                    TimeSlotIn = table.Column<string>(nullable: false),
+                    TimeSlotOut = table.Column<string>(nullable: false),
                     UserId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
