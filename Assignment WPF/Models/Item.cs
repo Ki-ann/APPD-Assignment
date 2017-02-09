@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Assignment_WPF
 {
-    
+
     public class Category
     {
         [Key]
@@ -14,7 +14,6 @@ namespace Assignment_WPF
         public int CategoryId { get; set; }
         [Required]
         public string CategoryName { get; set; }
-        public List<Item> Items { get; set; }
     }
     public class Item
     {
@@ -27,29 +26,15 @@ namespace Assignment_WPF
         public string ItemName { get; set; }
         [Required]
         public decimal ItemPrice { get; set; }
-        public Category Category { get; set; }
-        public List<Booking> BookingDetails { get; set; }
-     //   public CartItems CartItems { get; set; }
     }
 
-    public class CartItems
+    public class BookingOrder
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int CartItemId { get; set; }
-        [Required]
-        public int ItemId { get; set; }
-       // public Item Item { get; set; }
-        public Cart Cart { get; set; }
-    }
-    public class Cart
-    {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int CartId { get; set; }
-        [Required]
-        public List<CartItems> CartList { get; set; }
-
+        public BookingOrder()
+        {
+            this.BookingList = new List<Booking>();
+        }
+        public List<Booking> BookingList { get; set; }
     }
     public class Booking
     {
@@ -61,26 +46,15 @@ namespace Assignment_WPF
         [Required]
         public int ItemId { get; set; }
         [Required]
-        public DateTime BookingDateTime
-        {
-            get
-            {
-                return DateTime.Now;
-            }
-            set { this.BookingDateTime = value; }
-
-        }
+        public DateTime BookingDateTime { get; set; }
         [Required]
-        public DateTime TimeSlotIn { get; set; }
+        public string TimeSlotIn { get; set; }
         [Required]
-        public DateTime TimeSlotOut { get; set; }
+        public string TimeSlotOut { get; set; }
         [Required]
-        public DateTime ReservedDate { get; set; }
+        public DateTime? ReservedDate { get; set; }
         [Required]
         public string ReservedAddress { get; set; }
-        public Payment Payment { get; set; }
-        public User User { get; set; }
-        public Item Item { get; set; }
     }
 
 
@@ -103,7 +77,6 @@ namespace Assignment_WPF
         public string PhoneNo { get; set; }
         [Required]
         public string Password { get; set; }
-        public List<Booking> BookingDetails { get; set; }
 
     }
 
@@ -124,6 +97,5 @@ namespace Assignment_WPF
         public string CardNo { get; set; }
         [Required]
         public DateTime ExpDate { get; set; }
-        public Booking Booking { get; set; }
     }
 }

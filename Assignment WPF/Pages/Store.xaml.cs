@@ -2,11 +2,10 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
-using Assignment_WPF.Data;
 using static Assignment_WPF.Data.EFModels;
 using System.Collections.Generic;
 
-namespace Assignment_WPF
+namespace Assignment_WPF.Pages
 {
     /// <summary>
     /// Interaction logic for Store.xaml
@@ -16,11 +15,11 @@ namespace Assignment_WPF
         public Store()
         {
             InitializeComponent();
-            this.Loaded += UserControl_Loaded;
+            this.Loaded += Page_Loaded;
 
         }
 
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             Grid btnGrid = new Grid();
             ColumnDefinition c0 = new ColumnDefinition();
@@ -71,9 +70,9 @@ namespace Assignment_WPF
 
         void button_Click(object sender, RoutedEventArgs e)
         {
-            int collectedItemId = Int32.Parse(((Button)sender).Tag.ToString());
-            MessageBox.Show(collectedItemId.ToString());
-            // NavigationService.Navigate(new Cleaner(collectedItemId));
+            int collectedCategoryId = Int32.Parse(((Button)sender).Tag.ToString()) + 1;
+           // MessageBox.Show(collectedCategoryId.ToString());
+            NavigationService.Navigate(new Cleaner(collectedCategoryId));
 
         }//end of button_Click
     }

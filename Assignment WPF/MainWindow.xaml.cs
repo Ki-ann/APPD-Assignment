@@ -1,4 +1,6 @@
 ﻿
+using Assignment_WPF.Data;
+using Assignment_WPF.Pages;
 using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
@@ -25,44 +27,41 @@ namespace Assignment_WPF
     {
 
         public static Brush theme;
-        
-        // public BookingSystemManager _bookingManager; //data variable is used to represent the entire file content
+        public BookingManager _bookingManager; //data variable is used to represent the entire file content
+        public BookingOrder _currentBooking; //represent cart;
         public MainWindow()
         {
             InitializeComponent();
-           // _bookingManager = new BookingSystemManager();
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            _bookingManager = new BookingManager();
+            _currentBooking = new BookingOrder();
             Loaded += MainWindow_Loaded;
-            frame.NavigationService.Navigate(new Home());   //initial screen
-            cmbColors.ItemsSource = typeof(Brushes).GetProperties();
-            
         }
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             Application.Current.MainWindow = this;
+            frame.NavigationService.Navigate(new Home());   //initial screen
+            cmbColors.ItemsSource = typeof(Brushes).GetProperties();
         }//end of MainWindow_loaded
         private void btnHome_Click(object sender, RoutedEventArgs e)
         {
-            //frame.NavigationService.Navigate(new Home());           //navigate to Home.xaml
+            frame.NavigationService.Navigate(new Home());           //navigate to Home.xaml
         }
 
         private void btnStore_Click(object sender, RoutedEventArgs e)
         {
-            //frame.NavigationService.Navigate(new Store());          //navigate to Store.xaml
+            frame.NavigationService.Navigate(new Store());          //navigate to Store.xaml
         }
 
         private void btnCart_Click(object sender, RoutedEventArgs e)
         {
-            //frame.NavigationService.Navigate(new Cart());
+            frame.NavigationService.Navigate(new CartPage());
         }
         private void cmbColors_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             theme = (Brush)(cmbColors.SelectedItem as PropertyInfo).GetValue(null, null);
             bgBox.Background = theme;
-            
         }
-
-
     }
 
 }

@@ -1,19 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
-namespace Assignment_WPF
+namespace Assignment_WPF.Pages
 {
     /// <summary>
     /// Interaction logic for Thankyou.xaml
@@ -28,10 +16,13 @@ namespace Assignment_WPF
             InitializeComponent();
             _totalPrice = price;
             _Panel = stackpanel;
-            foreach(object child in _Panel.Children)
+            foreach(StackPanel child in _Panel.Children)
             {
-                TextBlock item = (TextBlock)child;
-                _description += item.Text + "\n"; 
+                foreach (TextBlock tb in (StackPanel)(_Panel.Children))
+                {
+                    StackPanel item = (TextBlock)child;
+                    _description += item.Text + "\n";
+                }
             }
         }
 

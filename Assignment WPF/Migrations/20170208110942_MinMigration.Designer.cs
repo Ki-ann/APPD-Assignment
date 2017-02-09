@@ -8,8 +8,8 @@ using Assignment_WPF.Data;
 namespace Assignment_WPF.Migrations
 {
     [DbContext(typeof(EFModels.AppContext))]
-    [Migration("20170205154958_MyFirstMigration")]
-    partial class MyFirstMigration
+    [Migration("20170208110942_MinMigration")]
+    partial class MinMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -40,39 +40,7 @@ namespace Assignment_WPF.Migrations
 
                     b.HasKey("BookingId");
 
-                    b.HasIndex("ItemId");
-
-                    b.HasIndex("UserId");
-
                     b.ToTable("Booking");
-                });
-
-            modelBuilder.Entity("Assignment_WPF.Cart", b =>
-                {
-                    b.Property<int>("CartId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.HasKey("CartId");
-
-                    b.ToTable("Cart");
-                });
-
-            modelBuilder.Entity("Assignment_WPF.CartItems", b =>
-                {
-                    b.Property<int>("CartItemId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("CartId");
-
-                    b.Property<int>("ItemId");
-
-                    b.HasKey("CartItemId");
-
-                    b.HasIndex("CartId");
-
-                    b.ToTable("CartItems");
                 });
 
             modelBuilder.Entity("Assignment_WPF.Category", b =>
@@ -104,8 +72,6 @@ namespace Assignment_WPF.Migrations
 
                     b.HasKey("ItemId");
 
-                    b.HasIndex("CategoryId");
-
                     b.ToTable("Item");
                 });
 
@@ -133,9 +99,6 @@ namespace Assignment_WPF.Migrations
                     b.HasKey("PaymentId", "UserId");
 
                     b.HasAlternateKey("PaymentId");
-
-                    b.HasIndex("BookingId")
-                        .IsUnique();
 
                     b.ToTable("Payment");
                 });
@@ -170,42 +133,6 @@ namespace Assignment_WPF.Migrations
                     b.HasKey("UserId");
 
                     b.ToTable("User");
-                });
-
-            modelBuilder.Entity("Assignment_WPF.Booking", b =>
-                {
-                    b.HasOne("Assignment_WPF.Item", "Item")
-                        .WithMany("BookingDetails")
-                        .HasForeignKey("ItemId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Assignment_WPF.User", "User")
-                        .WithMany("BookingDetails")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Assignment_WPF.CartItems", b =>
-                {
-                    b.HasOne("Assignment_WPF.Cart", "Cart")
-                        .WithMany("CartList")
-                        .HasForeignKey("CartId");
-                });
-
-            modelBuilder.Entity("Assignment_WPF.Item", b =>
-                {
-                    b.HasOne("Assignment_WPF.Category", "Category")
-                        .WithMany("Items")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Assignment_WPF.Payment", b =>
-                {
-                    b.HasOne("Assignment_WPF.Booking", "Booking")
-                        .WithOne("Payment")
-                        .HasForeignKey("Assignment_WPF.Payment", "BookingId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
         }
     }
