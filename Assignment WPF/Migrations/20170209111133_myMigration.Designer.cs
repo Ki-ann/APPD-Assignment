@@ -8,9 +8,10 @@ using Assignment_WPF.Data;
 namespace Assignment_WPF.Migrations
 {
     [DbContext(typeof(EFModels.AppContext))]
-    partial class AppContextModelSnapshot : ModelSnapshot
+    [Migration("20170209111133_myMigration")]
+    partial class myMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.0-rtm-22752")

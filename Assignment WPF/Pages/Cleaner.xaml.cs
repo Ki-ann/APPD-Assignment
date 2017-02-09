@@ -1,13 +1,20 @@
 ﻿using Assignment_WPF.Data;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using static Assignment_WPF.Data.EFModels;
+using System.Windows.Shapes;
 
-namespace Assignment_WPF.Pages
+namespace Assignment_WPF
 {
     /// <summary>
     /// Interaction logic for Cleaner.xaml
@@ -16,100 +23,99 @@ namespace Assignment_WPF.Pages
     public partial class Cleaner : Page
     {
 
-        int _cleanerId = 0;
+        int _itemId = 0;
+        string _itemName = "";
 
-        public Cleaner(int inCleanerId)
+        public Cleaner()
         {
-            _cleanerId = inCleanerId;
-
-            InitializeComponent();
-            this.Loaded += Page_Loaded;
-
+            //_itemId = inItemId;
+            ////Set reference to the MainWindow instance
+            //MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+            ////Set reference to the _currentOrder which belongs to the MainWindow instance
+            //Order order = mainWindow._currentOrder;
+            //InitializeComponent();
+            //BookingSystemManager bookingManager = mainWindow._bookingManager;
+            //List<Rental> rentalOptionListForComboBox = bookingManager.Rentals.Where(input => input.ItemId == _itemId).ToList();
+            //this.rentalOptionComboBoxInput.ItemsSource = rentalOptionListForComboBox;
+            //_itemName = bookingManager.Items
+            //    .Where(input => input.ItemId == _itemId)
+            //    .Single()
+            //    .ItemName;
+            //this.itemNameTextBlock.Text = _itemName;
         }
-        private async void Page_Loaded(object sender, RoutedEventArgs e)
+        private void Date_SelectedDateChanged(object sender,SelectionChangedEventArgs e)
         {
-            MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
-            BookingManager bookingManager = mainWindow._bookingManager;
+            // ... Get DatePicker reference.
+            var picker = sender as DatePicker;
 
-            using (var context = new AppContext())
-            {                        //set Chosen category name
-                var inCleaningName = (from cat in context.Category
-                                      where cat.CategoryId == _cleanerId
-                                      select cat.CategoryName).Single();
-                itemNameTextBlock.Text = inCleaningName;
+            // ... Get nullable DateTime from SelectedDate.
+            DateTime? date = picker.SelectedDate;
+            if (date == null)
+            {
+
             }
-            var itemOptionListForComboBox = bookingManager.Items.Where(c => c.CategoryId == _cleanerId).ToList();
-            rentalOptionComboBoxInput.ItemsSource = itemOptionListForComboBox;
-            await Task.Delay(15);                       //delay needed to allow ItemSource to initialize, and SelectedIndex to succeed.
-            rentalOptionComboBoxInput.SelectedIndex = 0;
+            else
+            {
 
+            }
         }
         private void btnAddtoCrt_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
-            BookingOrder bookingOrder = mainWindow._currentBooking;
-            //
-            //ValidationCheck
-            //
-            Boolean isAllUserEntryOkay = true;
-            if (this.Date.SelectedDate == null)
-            {
-                MessageBox.Show("You need to specify the reserve date.");
-                isAllUserEntryOkay = false;
-            }
-            if (this.TimeIn.Text == String.Empty)
-            {
-                MessageBox.Show("You need to specify the time slot in.");
-                isAllUserEntryOkay = false;
-            }
-            if (this.TimeOut.Text == String.Empty)
-            {
-                MessageBox.Show("You need to specify the time slot out.");
-                isAllUserEntryOkay = false;
-            }
-            if (this.rentalOptionComboBoxInput.SelectedItem == null)
-            {
-                MessageBox.Show("You need to specify the booking option.");
-                isAllUserEntryOkay = false;
-            }
-            if (this.Address.Text == String.Empty)
-            {
-                MessageBox.Show("You need to specify the cleaning location.");
-                isAllUserEntryOkay = false;
-            }
-            if (this.PstlCd.Text == String.Empty)
-            {
-                MessageBox.Show("You need to specify the Postal Code.");
-                isAllUserEntryOkay = false;
-            }
-            if (isAllUserEntryOkay == true)
-            {
-                Item i = (Item)this.rentalOptionComboBoxInput.SelectedItem;
+            //MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+            //Order order = mainWindow._currentOrder;
+            //BookingSystemManager bookingManager = mainWindow._bookingManager;
+            //Boolean isAllUserEntryOkay = true;
+            //if (this.Date.SelectedDate == null)
+            //{
+            //    MessageBox.Show("You need to specify the reserve date.");
+            //    isAllUserEntryOkay = false;
+            //}
+            //if (this.Time.Text == String.Empty)
+            //{
+            //    MessageBox.Show("You need to specify the time slot.");
+            //    isAllUserEntryOkay = false;
+            //}
+            //if (this.rentalOptionComboBoxInput.SelectedItem == null)
+            //{
+            //    MessageBox.Show("You need to specify the booking option.");
+            //    isAllUserEntryOkay = false;
+            //}
+            //if (this.Address.Text == String.Empty)
+            //{
+            //    MessageBox.Show("You need to specify the cleaning location.");
+            //    isAllUserEntryOkay = false;
+            //}
+            //if (this.PstlCd.Text == String.Empty)
+            //{
+            //    MessageBox.Show("You need to specify the Postal Code.");
+            //    isAllUserEntryOkay = false;
+            //}
+            //if (isAllUserEntryOkay == true)
+            //{
+            //    if (order == null)
+            //    {
+            //        order = new Order();
+            //        order.OrderedBy = 2; //Assume that CINDY logon to place this order.
+            //    }
+            //    OrderDetail orderDetail = new OrderDetail();
 
-                Booking order = new Booking();
-                order.UserId = 1;
-                order.ItemId = i.ItemId;
-                order.BookingDateTime = DateTime.Now;
-                order.ReservedDate = Date.SelectedDate;
-                order.TimeSlotIn = TimeIn.Text;
-                order.TimeSlotOut = TimeOut.Text;
-                order.ReservedAddress = Address.Text;
-                order.ReservedPostal = PstlCd.Text;
-                bookingOrder.BookingList.Add(order);
-                mainWindow._currentBooking = bookingOrder;
-                MessageBox.Show("You have added one reservation into your cart");
 
-            }
-            //user has a cartId when logged in,
-            //Add values to CartItems with cartId
+            //    orderDetail.RentalId = ((Rental)this.rentalOptionComboBoxInput.SelectedItem).RentalId;
+            //    orderDetail.PickupTimeSlot = this.Time.Text;
+            //    orderDetail.ReserveDate = this.Date.SelectedDate;
+            //    orderDetail.PstlCd = Int32.Parse(this.PstlCd.Text);
+            //    orderDetail.Address = this.Address.Text;
+            //    orderDetail.ItemId = _itemId;
+            //    order.OrderDetails.Add(orderDetail);
 
-            //Cart has a list of CartItems
+            //    mainWindow._currentOrder = order;
+            //    MessageBox.Show("You have added one reservation into your cart");
+            //}
         }
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new CartPage());        //navigate to Cart.xaml
+            NavigationService.Navigate(new Cart());        //navigate to Cart.xaml
         }
     }
 }
-

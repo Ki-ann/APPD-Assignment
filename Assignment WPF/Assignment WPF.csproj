@@ -54,6 +54,14 @@
       <HintPath>..\packages\MahApps.Metro.1.4.1\lib\net45\MahApps.Metro.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="MaterialDesignColors, Version=1.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignColors.1.1.2\lib\net45\MaterialDesignColors.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MaterialDesignThemes.Wpf, Version=2.2.1.750, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignThemes.2.2.1.750\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.AspNetCore.Hosting.Abstractions, Version=1.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNetCore.Hosting.Abstractions.1.1.0\lib\net451\Microsoft.AspNetCore.Hosting.Abstractions.dll</HintPath>
       <Private>True</Private>
@@ -195,29 +203,25 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Data\BookingManager.cs" />
     <Compile Include="Data\EFModels.cs" />
-    <Compile Include="Migrations\20170209102108_MyMigration.cs" />
-    <Compile Include="Migrations\20170209102108_MyMigration.designer.cs">
-      <DependentUpon>20170209102108_MyMigration.cs</DependentUpon>
+    <Compile Include="Migrations\20170209111133_myMigration.cs" />
+    <Compile Include="Migrations\20170209111133_myMigration.designer.cs">
+      <DependentUpon>20170209111133_myMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\AppContextModelSnapshot.cs" />
     <Compile Include="Models\Item.cs" />
     <Compile Include="Models\Json.cs" />
-    <Compile Include="Pages\CartPage.xaml.cs">
-      <DependentUpon>CartPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Cleaner.xaml.cs">
-      <DependentUpon>Cleaner.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Pages\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Store.xaml.cs">
-      <DependentUpon>Store.xaml</DependentUpon>
+    <Compile Include="Pages\LoginPage.xaml.cs">
+      <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Thankyou.xaml.cs">
-      <DependentUpon>Thankyou.xaml</DependentUpon>
+    <Compile Include="Pages\Register.xaml.cs">
+      <DependentUpon>Register.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\LoginWin.xaml.cs">
+      <DependentUpon>LoginWin.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\Receipt.xaml.cs">
       <DependentUpon>Receipt.xaml</DependentUpon>
@@ -234,23 +238,19 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Pages\CartPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\Cleaner.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Pages\Home.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Store.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="Pages\LoginPage.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Thankyou.xaml">
+    <Page Include="Pages\Register.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\LoginWin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
