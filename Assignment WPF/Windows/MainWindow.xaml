@@ -1,0 +1,160 @@
+﻿<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:Assignment_WPF.Windows"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        x:Class="Assignment_WPF.Windows.MainWindow"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Background="{DynamicResource MaterialDesignPaper}"
+        TextElement.FontWeight="Medium"
+        TextElement.FontSize="14"
+        FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
+        mc:Ignorable="d"
+        Title="MainWindow"
+        Height="600"
+        Width="1000">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Shadows.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ToggleButton.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid x:Name="MainGrid"
+          HorizontalAlignment="Stretch"
+          VerticalAlignment="Stretch">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="10*" />
+        </Grid.RowDefinitions>
+        <Frame x:Name="frame"
+               Content=""
+               Grid.ColumnSpan="6"
+               Grid.Row="1"
+               Grid.Column="0"
+               HorizontalAlignment="Stretch"
+               VerticalAlignment="Stretch"
+               NavigationUIVisibility="Hidden"
+               Padding="15" />
+        <materialDesign:ColorZone Padding="16"
+                                  VerticalAlignment="Stretch"
+                                  materialDesign:ShadowAssist.ShadowDepth="Depth2"
+                                  Mode="PrimaryMid"
+                                  Grid.ColumnSpan="5" />
+
+        <materialDesign:DrawerHost HorizontalAlignment="Stretch"
+                                   VerticalAlignment="Stretch"
+                                   Grid.RowSpan="2"
+                                   BorderBrush="{DynamicResource MaterialDesignDivider}"
+                                   Margin="0,-2,0,2">
+            <materialDesign:DrawerHost.LeftDrawerContent>
+                <StackPanel Width="200">
+                    <materialDesign:ColorZone 
+                                              Height="51"
+                                              materialDesign:ShadowAssist.ShadowDepth="Depth2"
+                                              Mode="PrimaryMid"
+                                              DockPanel.Dock="Top">
+                        <ToggleButton Style="{StaticResource MaterialDesignHamburgerToggleButton}"
+                                      HorizontalAlignment="Right"
+                                      IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}"
+                                      Margin="0,0,10,0"
+                                      VerticalAlignment="Center">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Unchecked">
+                                    <i:InvokeCommandAction Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
+                                                           CommandParameter="{x:Static Dock.Left}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </ToggleButton>
+                    </materialDesign:ColorZone>
+                    
+                    <Button x:Name="btnHome"
+                            Content="Home"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"
+                            Click="btnHome_Click" />
+                    <Button x:Name="btnStore"
+                            Content="Store Page"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"
+                            Click="btnStore_Click" />
+                    <Button x:Name="btnCart"
+                            Content="Cart"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"
+                            Click="btnCart_Click" />
+                </StackPanel>
+            </materialDesign:DrawerHost.LeftDrawerContent>
+            <!-- <Button Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
+                    CommandParameter="{x:Static Dock.Left}"
+                    Grid.Column="0"
+                    HorizontalAlignment="Right"
+                    Margin="0,0,10,0"
+                    VerticalAlignment="Top">
+                <materialDesign:PackIcon Kind="ArrowLeft" /> 
+            </Button> -->
+            <ToggleButton Style="{StaticResource MaterialDesignHamburgerToggleButton}"
+                          IsChecked="False"
+                          Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
+                          CommandParameter="{x:Static Dock.Left}"
+                          VerticalAlignment="Top"
+                          HorizontalAlignment="Right"
+                          x:Name="MenuToggleButton"
+                          Margin="0,10,10,0" />
+        </materialDesign:DrawerHost>
+
+        <Label x:Name="Color"
+               Content="Color Theme:"
+               Grid.Column="3"
+               HorizontalAlignment="Right"
+               VerticalAlignment="Stretch" />
+        <StackPanel HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    Grid.Column="4">
+            <ComboBox x:Name="cmbColors"
+                      HorizontalAlignment="Stretch"
+                      VerticalAlignment="Stretch"
+                      SelectionChanged="cmbColors_SelectionChanged"
+                      Height="27"
+                      Margin="0,0,-0.2,0">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal"
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Stretch">
+
+                            <Rectangle Fill="{Binding Name}"
+                                       Width="16"
+                                       Height="16"
+                                       Margin="0,2,5,2" />
+                            <TextBlock Text="{Binding Name}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </StackPanel>
+        <TextBox x:Name="bgBox"
+                 TextWrapping="Wrap"
+                 Panel.ZIndex="-1"
+                 Grid.ColumnSpan="5"
+                 Grid.Column="0"
+                 HorizontalAlignment="Stretch"
+                 Grid.RowSpan="2"
+                 VerticalAlignment="Stretch"
+                 BorderThickness="0"
+                 IsEnabled="False" />
+
+    </Grid>
+</Window>

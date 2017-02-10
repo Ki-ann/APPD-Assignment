@@ -88,12 +88,13 @@ namespace Assignment_WPF.Migrations
 
                     b.Property<int>("UserId");
 
-                    b.Property<int>("BookingId");
+                    b.Property<int>("CVC");
 
                     b.Property<string>("CardNo")
                         .IsRequired();
 
-                    b.Property<DateTime>("ExpDate");
+                    b.Property<DateTime?>("ExpDate")
+                        .IsRequired();
 
                     b.Property<string>("FirstName")
                         .IsRequired();

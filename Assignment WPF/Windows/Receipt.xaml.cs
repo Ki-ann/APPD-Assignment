@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Assignment_WPF
+namespace Assignment_WPF.Windows
 {
     /// <summary>
     /// Interaction logic for Receipt.xaml

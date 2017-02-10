@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
+using Assignment_WPF.Data;
 using static Assignment_WPF.Data.EFModels;
 using System.Collections.Generic;
 

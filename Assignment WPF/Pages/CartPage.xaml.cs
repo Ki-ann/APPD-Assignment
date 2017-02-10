@@ -1,7 +1,12 @@
 ﻿using Assignment_WPF.Data;
+using Assignment_WPF.Windows;
+using System;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using static Assignment_WPF.Data.EFModels;
 
@@ -24,7 +29,7 @@ namespace Assignment_WPF.Pages
             InitializeComponent();
             if (!order.BookingList.Any())           //if empty
             {
-                CheckOut.IsEnabled = false;
+                CheckOut.IsEnabled = false;         //disable checkout button if empty
                 TextBlock messageTextBlock = new TextBlock();
                 messageTextBlock.Text = "You have not selected anything yet.";
                 contentStackPanel.Children.Add(messageTextBlock);
@@ -32,10 +37,11 @@ namespace Assignment_WPF.Pages
             }
             else
             {
-                foreach (var booking in order.BookingList)
+                foreach (var booking in order.BookingList)      //create Stackpanels of MessageBlock + ClearButton
                 {
-                    StackPanel sp = new StackPanel();
+                    StackPanel sp = new StackPanel() { Margin = new Thickness { Top = 30, Left = 25 } };
                     sp.Orientation = Orientation.Horizontal;
+
                     TextBlock messageTextBlock = new TextBlock()
                     {
                         Width = 300
@@ -57,18 +63,30 @@ namespace Assignment_WPF.Pages
                     messageTextBlock.Text += string.Format("Booked Date : {0}\n", booking.ReservedDate);
                     messageTextBlock.Text += string.Format("TimeSlot : {0}-{1}\n", booking.TimeSlotIn, booking.TimeSlotOut);
                     messageTextBlock.Text += string.Format("Service Address : {0} {1}\n", booking.ReservedAddress, booking.ReservedPostal);
+                    Image img = new Image();
+                    img.Height = 35;
+                    
+                    img.Source = new BitmapImage(new Uri(string.Format("pack://application:,,,/{0};component/Data/Images/black_x.png", Path.GetFileNameWithoutExtension(Application.ResourceAssembly.Location))));
                     Button btn = new Button()
                     {
-
                         Margin = new Thickness { Top = 3, Bottom = 3, Left = 3, Right = 3 },
-                        Height = 20,
-                        Width = 20,
+                        Height = 50,
+                        Width = 50,
                         Tag = booking
                     };
+                    btn.Content = img;
                     btn.Click += new RoutedEventHandler(Clear_Item);
                     sp.Children.Add(messageTextBlock);
                     sp.Children.Add(btn);
-                    this.contentStackPanel.Children.Add(sp);
+                    Border bd = new Border()
+                    {
+                        BorderBrush = Brushes.Black,
+                        BorderThickness = new Thickness(0, 0, 0, 1)
+                    };
+
+                    bd.Child = (StackPanel)sp;
+                    this.contentStackPanel.Children.Add(bd);            //Add Combo to mainStackPanel
+
                 }//end of foreach
                 textTotalPrice.Text = totalPrice.ToString();
             }//end of else
@@ -90,7 +108,11 @@ namespace Assignment_WPF.Pages
 
             this.mainWindow._currentBooking.BookingList.Remove(item);
 
-            contentStackPanel.Children.Remove((StackPanel)btn.Parent);
+            contentStackPanel.Children.Remove((Border)((StackPanel)btn.Parent).Parent); //contentStackPanel>(Border>StackPanel>[MessageBlock + button])
+            if (contentStackPanel.Children.Count < 1)
+            {
+                NavigationService.Navigate(new CartPage());
+            }
         }
         private void Clear_Cart_Click(object sender, RoutedEventArgs e)
         {
@@ -107,11 +129,11 @@ namespace Assignment_WPF.Pages
                 {
                     context.Booking.Add(b);
                     context.SaveChanges();
-                }
-            }
+                }//end of foreach
+            }//end of using
             MessageBox.Show("You have successfully booked our cleaning services.");
-            this.mainWindow._currentBooking = new BookingOrder();
-            NavigationService.Navigate(new Thankyou(totalPrice,contentStackPanel));
+            this.mainWindow._currentBooking = new BookingOrder(); //clear BookingList
+            NavigationService.Navigate(new Thankyou(totalPrice, contentStackPanel));
         }
 
 

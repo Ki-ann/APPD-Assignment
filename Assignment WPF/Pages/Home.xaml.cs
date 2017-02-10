@@ -13,13 +13,12 @@ namespace Assignment_WPF.Pages
         public Home()
         {
             InitializeComponent();
+
         }
 
         private void btnStore2_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new Store());
-           NavigationService.Navigate(new Uri("/Pages/Store.xaml", UriKind.Relative));
-
         }
     }
 }

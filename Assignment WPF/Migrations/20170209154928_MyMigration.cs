@@ -64,7 +64,7 @@ namespace Assignment_WPF.Migrations
                     PaymentId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     UserId = table.Column<int>(nullable: false),
-                    BookingId = table.Column<int>(nullable: false),
+                    CVC = table.Column<int>(nullable: false),
                     CardNo = table.Column<string>(nullable: false),
                     ExpDate = table.Column<DateTime>(nullable: false),
                     FirstName = table.Column<string>(nullable: false),

@@ -8,7 +8,7 @@ using Assignment_WPF.Data;
 namespace Assignment_WPF.Migrations
 {
     [DbContext(typeof(EFModels.AppContext))]
-    [Migration("20170209102108_MyMigration")]
+    [Migration("20170209154928_MyMigration")]
     partial class MyMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -89,12 +89,13 @@ namespace Assignment_WPF.Migrations
 
                     b.Property<int>("UserId");
 
-                    b.Property<int>("BookingId");
+                    b.Property<int>("CVC");
 
                     b.Property<string>("CardNo")
                         .IsRequired();
 
-                    b.Property<DateTime>("ExpDate");
+                    b.Property<DateTime?>("ExpDate")
+                        .IsRequired();
 
                     b.Property<string>("FirstName")
                         .IsRequired();

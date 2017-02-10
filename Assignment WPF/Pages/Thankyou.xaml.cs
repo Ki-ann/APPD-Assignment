@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assignment_WPF.Windows;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -17,9 +18,9 @@ namespace Assignment_WPF.Pages
             InitializeComponent();
             _totalPrice = price;
             _Panel = stackpanel;
-            foreach(StackPanel child in _Panel.Children)
+            foreach(Border child in _Panel.Children)
             {
-                foreach (object tb in child.Children)
+                foreach (object tb in ((StackPanel)(child.Child)).Children)
                 {
                     if (tb.GetType() == typeof(TextBlock))
                     {
