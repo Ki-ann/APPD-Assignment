@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Assignment_WPF.Windows"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         mc:Ignorable="d"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -21,7 +22,7 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="10*" />
         </Grid.RowDefinitions>
         <Frame x:Name="frame"
                Content=""
@@ -30,5 +31,10 @@
                HorizontalAlignment="Stretch"
                VerticalAlignment="Stretch"
                NavigationUIVisibility="Hidden"/>
+       <materialDesign:ColorZone Padding="16"
+                                  VerticalAlignment="Stretch"
+                                  materialDesign:ShadowAssist.ShadowDepth="Depth2"
+                                  Mode="PrimaryMid"
+                                  Grid.ColumnSpan="5" />
     </Grid>
 </Window>

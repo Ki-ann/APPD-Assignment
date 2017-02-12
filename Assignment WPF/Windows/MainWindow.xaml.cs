@@ -1,23 +1,14 @@
 ﻿
 using Assignment_WPF.Data;
 using Assignment_WPF.Pages;
-using MahApps.Metro.Controls;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using MaterialDesignColors.WpfExample;
+using MaterialDesignColors.WpfExample.Domain;
+using MaterialDesignThemes.Wpf;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Assignment_WPF.Windows
 {
@@ -30,6 +21,7 @@ namespace Assignment_WPF.Windows
         public static Brush theme;
         public BookingManager _bookingManager; //data variable is used to represent the entire file content
         public BookingOrder _currentBooking; //represent cart;
+        public User _currentUser;
         public MainWindow()
         {
             InitializeComponent();
@@ -38,12 +30,21 @@ namespace Assignment_WPF.Windows
             _currentBooking = new BookingOrder();
             Loaded += MainWindow_Loaded;
         }
+        public MainWindow(User _inUser)
+        {
+            InitializeComponent();
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            _bookingManager = new BookingManager();
+            _currentBooking = new BookingOrder();
+            _currentUser = _inUser;
+            userBox.Text = _currentUser.FirstName + " " + _currentUser.LastName;
+            Loaded += MainWindow_Loaded;
+        }
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             Application.Current.MainWindow = this;
 
             frame.NavigationService.Navigate(new Home());   //initial screen
-            cmbColors.ItemsSource = typeof(Brushes).GetProperties();
         }//end of MainWindow_loaded
         private void btnHome_Click(object sender, RoutedEventArgs e)
         {
@@ -59,10 +60,29 @@ namespace Assignment_WPF.Windows
         {
             frame.NavigationService.Navigate(new CartPage());
         }
-        private void cmbColors_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void MenuPopupButton_OnClick(object sender, RoutedEventArgs e)
         {
-            theme = (Brush)(cmbColors.SelectedItem as PropertyInfo).GetValue(null, null);
-            bgBox.Background = theme;
+            var MessageDialog = new OptionsDialog
+            {};
+
+            await DialogHost.Show(MessageDialog, "RootDialog");
+        }
+        private async void StatsPopupButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            var MessageDialog = new StatsDialog
+            {
+
+                _inUser = _currentUser
+            };
+
+            await DialogHost.Show(MessageDialog, "RootDialog");
+        }
+        private async void LogoutPopupButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            var MessageDialog = new LogoutDialog
+            { };
+
+            await DialogHost.Show(MessageDialog, "RootDialog");
         }
 
 

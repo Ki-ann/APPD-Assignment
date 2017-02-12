@@ -86,7 +86,7 @@ namespace Assignment_WPF.Pages
             }
             if(Int32.Parse(TimeIn.Text.Substring(0, 2))>=Int32.Parse(TimeOut.Text.Substring(0, 2)))
             {
-                MessageBox.Show("Timeslot Out cannot be lower or equal to Timeslow In.");
+                MessageBox.Show("Time Start cannot be before or same time as Time End.");
                 isAllUserEntryOkay = false;
             }
             if (isAllUserEntryOkay == true)
@@ -94,7 +94,7 @@ namespace Assignment_WPF.Pages
                 Item i = (Item)this.rentalOptionComboBoxInput.SelectedItem;
 
                 Booking order = new Booking();
-                order.UserId = 1;
+                order.UserId = mainWindow._currentUser.UserId;
                 order.ItemId = i.ItemId;
                 order.BookingDateTime = DateTime.Now;
                 order.ReservedDate = Date.SelectedDate;
@@ -102,9 +102,9 @@ namespace Assignment_WPF.Pages
                 order.TimeSlotOut = TimeOut.Text;
                 order.ReservedAddress = Address.Text;
                 order.ReservedPostal = PstlCd.Text;
-                bookingOrder.BookingList.Add(order);
                 if (isAvailable(order))
                 {
+                    bookingOrder.BookingList.Add(order);
                     mainWindow._currentBooking = bookingOrder;
                     MessageBox.Show("You have added one reservation into your cart");
                 }

@@ -209,13 +209,12 @@
     </ApplicationDefinition>
     <Compile Include="Data\BookingManager.cs" />
     <Compile Include="Data\EFModels.cs" />
-    <Compile Include="Migrations\20170209154928_MyMigration.cs" />
-    <Compile Include="Migrations\20170209154928_MyMigration.designer.cs">
-      <DependentUpon>20170209154928_MyMigration.cs</DependentUpon>
+    <Compile Include="Migrations\20170212183649_myMigration.cs" />
+    <Compile Include="Migrations\20170212183649_myMigration.designer.cs">
+      <DependentUpon>20170212183649_myMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\AppContextModelSnapshot.cs" />
     <Compile Include="Models\Item.cs" />
-    <Compile Include="Models\Json.cs" />
     <Compile Include="Pages\CartPage.xaml.cs">
       <DependentUpon>CartPage.xaml</DependentUpon>
     </Compile>
@@ -233,6 +232,15 @@
     </Compile>
     <Compile Include="Pages\Register.xaml.cs">
       <DependentUpon>Register.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\LogoutDialog.xaml.cs">
+      <DependentUpon>LogoutDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\StatsDialog.xaml.cs">
+      <DependentUpon>StatsDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\OptionsDialog.xaml.cs">
+      <DependentUpon>OptionsDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Store.xaml.cs">
       <DependentUpon>Store.xaml</DependentUpon>
@@ -257,6 +265,18 @@
     <Page Include="Pages\Register.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\LogoutDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\StatsDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\OptionsDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Windows\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -345,6 +365,10 @@
   <ItemGroup>
     <Resource Include="Data\Images\black_x.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Data\Images\Logo.png" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -43,7 +43,7 @@ namespace Assignment_WPF.Pages
             {
                 context.Add(pay);
                 context.SaveChanges();
-                MessageBox.Show("Registration was a Success!");
+                MessageBox.Show("Your account has been registered!");
             }
             NavigationService.Navigate(new LoginPage());
         }

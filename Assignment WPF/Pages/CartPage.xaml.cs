@@ -48,18 +48,23 @@ namespace Assignment_WPF.Pages
                     };
                     string itemName = "";
                     decimal itemPrice = 0.00M;
+                    int quantity = 0;
                     using (var context = new AppContext())
                     {
                         itemName = (from item in context.Item
                                     where item.ItemId == booking.ItemId
                                     select item.ItemName).Single();
+                        int bookIn = Int32.Parse(booking.TimeSlotIn.Substring(0, 2));
+                        int bookOut = Int32.Parse(booking.TimeSlotOut.Substring(0, 2));
+                        quantity = bookOut - bookIn;
+
                         itemPrice = (from item in context.Item
                                      where item.ItemId == booking.ItemId
-                                     select item.ItemPrice).Single();
+                                     select item.ItemPrice).Single() * quantity ;
                         totalPrice += itemPrice;
                     }//end of using
                     messageTextBlock.Text += string.Format("Item Option : {0}\n", itemName);
-                    messageTextBlock.Text += string.Format("Price : {0}\n", itemPrice);
+                    messageTextBlock.Text += string.Format("Price : ${0}\n", itemPrice);
                     messageTextBlock.Text += string.Format("Booked Date : {0}\n", booking.ReservedDate);
                     messageTextBlock.Text += string.Format("TimeSlot : {0}-{1}\n", booking.TimeSlotIn, booking.TimeSlotOut);
                     messageTextBlock.Text += string.Format("Service Address : {0} {1}\n", booking.ReservedAddress, booking.ReservedPostal);
@@ -102,13 +107,16 @@ namespace Assignment_WPF.Pages
                 decimal itemPrice = (from i in context.Item
                                      where i.ItemId == book.ItemId
                                      select i.ItemPrice).Single();
-                totalPrice = totalPrice - itemPrice;
+                int bookIn = Int32.Parse(book.TimeSlotIn.Substring(0, 2));
+                int bookOut = Int32.Parse(book.TimeSlotOut.Substring(0, 2));
+
+                totalPrice = totalPrice - itemPrice*(bookOut - bookIn);
                 textTotalPrice.Text = totalPrice.ToString();
             }
 
             this.mainWindow._currentBooking.BookingList.Remove(item);
 
-            contentStackPanel.Children.Remove((Border)((StackPanel)btn.Parent).Parent); //contentStackPanel>(Border>StackPanel>[MessageBlock + button])
+            contentStackPanel.Children.Remove((Border)((StackPanel)btn.Parent).Parent); //contentStackPanel>(Border>StackPanel>[MessageBleock + button])
             if (contentStackPanel.Children.Count < 1)
             {
                 NavigationService.Navigate(new CartPage());

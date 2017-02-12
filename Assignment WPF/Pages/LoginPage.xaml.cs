@@ -1,18 +1,8 @@
 ﻿using Assignment_WPF.Windows;
-using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using static Assignment_WPF.Data.EFModels;
 
 namespace Assignment_WPF.Pages
@@ -34,26 +24,29 @@ namespace Assignment_WPF.Pages
             {
                 allUsers = context.User.ToList();
             }
-            foreach (User u in allUsers)
+
+            if (usr.Text != string.Empty && pass.Password != string.Empty)
             {
-                if (u.EmailAdd == usr.Text && u.Password == pass.Text)
+                if (allUsers.Where(c => c.EmailAdd == usr.Text).Any())
                 {
-                    MessageBox.Show(string.Format("Welcome {0}!", u.FirstName + " " + u.LastName));
-                    LoginWindow mainWindow = (LoginWindow)Application.Current.MainWindow;
-                    Application.Current.MainWindow = new MainWindow();
-                    Application.Current.MainWindow.Show();
-                    mainWindow.Close();
-                }else if(u.EmailAdd != usr.Text)
-                {
-                    MessageBox.Show("Email Address does not exist!");
-                }else if(u.EmailAdd == usr.Text && u.Password != pass.Text)
-                {
-                    MessageBox.Show("Password is incorrect!");
+                    if (allUsers.Where(c => c.Password == pass.Password).Any())
+                    {
+                        User u = allUsers.Where(c => c.EmailAdd == usr.Text).FirstOrDefault();
+                        MessageBox.Show(string.Format("Welcome {0}!", u.FirstName + " " + u.LastName));
+                        LoginWindow mainWindow = (LoginWindow)Application.Current.MainWindow;
+                        Application.Current.MainWindow = new MainWindow(u);
+                        Application.Current.MainWindow.Show();
+                        mainWindow.Close();
+                        return;
+                    }
+                    else { MessageBox.Show("Password is incorrect!"); return; }
                 }
+                else { MessageBox.Show("Email Address does not exist!"); return; }
             }
-
-
+            else { MessageBox.Show("Both fields must be filled"); return; }
         }
+
+
 
         private void btnrgst_Click(object sender, RoutedEventArgs e)
         {

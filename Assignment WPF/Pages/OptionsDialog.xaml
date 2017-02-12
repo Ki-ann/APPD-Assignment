@@ -1,0 +1,63 @@
+﻿<UserControl x:Class="MaterialDesignColors.WpfExample.Domain.OptionsDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:MaterialDesignColors.WpfExample.Domain"
+             xmlns:materialDesignColors="clr-namespace:MaterialDesignColors;assembly=MaterialDesignColors"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:wpf="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf"
+             mc:Ignorable="d"
+             d:DesignHeight="500"
+             d:DesignWidth="500"
+             MaxWidth="500">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Label x:Name="Color"
+               Content="Color Theme:"
+               Grid.Column="0"
+               HorizontalAlignment="Right"
+               VerticalAlignment="Stretch" />
+        <StackPanel HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    Width="200"
+                    Grid.Column="1">
+            <ComboBox x:Name="cmbColors"
+                      HorizontalAlignment="Stretch"
+                      VerticalAlignment="Stretch"
+                      SelectionChanged="cmbColors_SelectionChanged"
+                      Height="27">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal"
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Stretch">
+
+                            <Rectangle Fill="{Binding Name}"
+                                       Width="16"
+                                       Height="16"
+                                       Margin="0,2,5,2" />
+                            <TextBlock Text="{Binding Name}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </StackPanel>
+        <Button Grid.Row="1"
+                Grid.ColumnSpan="2"
+                IsDefault="True"
+                Style="{DynamicResource MaterialDesignFlatButton}"
+                HorizontalAlignment="Center"
+                Margin="16 16 16 0"
+                Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+            ACCEPT
+        </Button>
+    </Grid>
+</UserControl>

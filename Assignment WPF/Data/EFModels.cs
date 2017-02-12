@@ -23,7 +23,7 @@ namespace Assignment_WPF.Data
             }
             protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             {
-                optionsBuilder.UseSqlServer(@"Server=DIT-NB1626401\SQLEXPRESS;Database=EF.CA2Assignemnt.NewDb;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer(@"Server=DIT-NB1626401\SQLEXPRESS;Database=EF.CA2Assignemnt.Db;Trusted_Connection=True;");
             }
         }
     }

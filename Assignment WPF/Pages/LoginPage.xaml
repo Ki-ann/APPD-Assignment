@@ -4,6 +4,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:local="clr-namespace:Assignment_WPF.Pages"
       mc:Ignorable="d"
       Title="LoginPage"
@@ -12,8 +13,8 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
-            <RowDefinition Height="0.2*" />
-            <RowDefinition Height="0.2*" />
+            <RowDefinition Height="0.3*" />
+            <RowDefinition Height="0.3*" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -27,6 +28,7 @@
                 Content="Login"
                 Height="30"
                 Width="90"
+                HorizontalAlignment="Center"
                 VerticalAlignment="Top"
                 Grid.Row="4"
                 Grid.Column="1"
@@ -39,49 +41,50 @@
                 Grid.Column="2"
                 Grid.Row="3"
                 Click="btnrgst_Click"
-                Margin="23,0,54,0" />
+                HorizontalAlignment="Center" />
         <TextBlock x:Name="pswd"
                    Height="30"
                    Width="60"
                    TextWrapping="Wrap"
                    Text="Password:"
+                   HorizontalAlignment="Center"
                    VerticalAlignment="Center"
                    Grid.Column="1"
                    Grid.Row="2"
-                   Margin="68,10,38,10" />
+                   Margin="53,30,53,9" />
         <TextBlock x:Name="usrname"
                    Height="30"
                    Width="60"
                    TextWrapping="Wrap"
                    Text="Username:"
+                   HorizontalAlignment="Center"
                    VerticalAlignment="Center"
                    Grid.Column="1"
                    Grid.Row="1"
-                   Margin="68,10,38,10" />
+                   Margin="53,30,53,9" />
         <TextBox x:Name="usr"
+                 materialDesign:HintAssist.Hint="Email"
                  TextWrapping="Wrap"
                  Height="30"
                  Width="120"
+                 HorizontalAlignment="Center"
                  VerticalAlignment="Center"
                  Grid.Column="2"
-                 Grid.Row="1"
-                 Margin="23,0,24,20" />
-        <TextBox x:Name="pass"
-                 Height="30"
-                 Width="120"
-                 TextWrapping="Wrap"
-                 VerticalAlignment="Center"
-                 Grid.Column="2"
-                 Grid.Row="2"
-                 Margin="23,0,24,20" />
-        <TextBlock x:Name="title"
-                   TextWrapping="Wrap"
-                   Text="Home Cleaning Services"
-                   VerticalAlignment="Center"
-                   HorizontalAlignment="Center"
-                   FontSize="36"
-                   TextDecorations="Underline"
-                   Grid.ColumnSpan="4"
-                   Grid.Column="0" />
+                 Grid.Row="1" />
+        <PasswordBox x:Name="pass"
+                     materialDesign:HintAssist.Hint="Password"
+                     Height="30"
+                     Width="120"
+                     HorizontalAlignment="Center"
+                     VerticalAlignment="Center"
+                     Grid.Column="2"
+                     Grid.Row="2" />
+        <Image Height="150"
+               Margin="10"
+               VerticalAlignment="Bottom"
+               HorizontalAlignment="Center"
+               Grid.ColumnSpan="4"
+               Grid.Column="0"
+               Source="pack://application:,,,/Data/Images/Logo.png"></Image>
     </Grid>
 </Page>

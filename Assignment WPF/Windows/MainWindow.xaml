@@ -29,11 +29,12 @@
           HorizontalAlignment="Stretch"
           VerticalAlignment="Stretch">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="198*" />
+            <ColumnDefinition Width="198*" />
+            <ColumnDefinition Width="199*" />
+            <ColumnDefinition Width="71*" />
+            <ColumnDefinition Width="127*" />
+            <ColumnDefinition Width="199*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -48,11 +49,12 @@
                VerticalAlignment="Stretch"
                NavigationUIVisibility="Hidden"
                Padding="15" />
+
         <materialDesign:ColorZone Padding="16"
                                   VerticalAlignment="Stretch"
                                   materialDesign:ShadowAssist.ShadowDepth="Depth2"
                                   Mode="PrimaryMid"
-                                  Grid.ColumnSpan="5" />
+                                  Grid.ColumnSpan="6" />
 
         <materialDesign:DrawerHost HorizontalAlignment="Stretch"
                                    VerticalAlignment="Stretch"
@@ -61,8 +63,7 @@
                                    Margin="0,-2,0,2">
             <materialDesign:DrawerHost.LeftDrawerContent>
                 <StackPanel Width="200">
-                    <materialDesign:ColorZone 
-                                              Height="51"
+                    <materialDesign:ColorZone Height="51"
                                               materialDesign:ShadowAssist.ShadowDepth="Depth2"
                                               Mode="PrimaryMid"
                                               DockPanel.Dock="Top">
@@ -79,7 +80,7 @@
                             </i:Interaction.Triggers>
                         </ToggleButton>
                     </materialDesign:ColorZone>
-                    
+
                     <Button x:Name="btnHome"
                             Content="Home"
                             HorizontalAlignment="Stretch"
@@ -97,58 +98,45 @@
                             Click="btnCart_Click" />
                 </StackPanel>
             </materialDesign:DrawerHost.LeftDrawerContent>
-            <!-- <Button Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
-                    CommandParameter="{x:Static Dock.Left}"
-                    Grid.Column="0"
-                    HorizontalAlignment="Right"
-                    Margin="0,0,10,0"
-                    VerticalAlignment="Top">
-                <materialDesign:PackIcon Kind="ArrowLeft" /> 
-            </Button> -->
             <ToggleButton Style="{StaticResource MaterialDesignHamburgerToggleButton}"
                           IsChecked="False"
                           Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
                           CommandParameter="{x:Static Dock.Left}"
                           VerticalAlignment="Top"
-                          HorizontalAlignment="Right"
+                          HorizontalAlignment="Left"
                           x:Name="MenuToggleButton"
-                          Margin="0,10,10,0" />
+                          Margin="10,10,0,0" />
         </materialDesign:DrawerHost>
 
-        <Label x:Name="Color"
-               Content="Color Theme:"
-               Grid.Column="3"
-               HorizontalAlignment="Right"
-               VerticalAlignment="Stretch" />
-        <StackPanel HorizontalAlignment="Stretch"
-                    VerticalAlignment="Stretch"
-                    Grid.Column="4">
-            <ComboBox x:Name="cmbColors"
-                      HorizontalAlignment="Stretch"
-                      VerticalAlignment="Stretch"
-                      SelectionChanged="cmbColors_SelectionChanged"
-                      Height="27"
-                      Margin="0,0,-0.2,0">
-                <ComboBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal"
-                                    HorizontalAlignment="Stretch"
-                                    VerticalAlignment="Stretch">
-
-                            <Rectangle Fill="{Binding Name}"
-                                       Width="16"
-                                       Height="16"
-                                       Margin="0,2,5,2" />
-                            <TextBlock Text="{Binding Name}" />
-                        </StackPanel>
-                    </DataTemplate>
-                </ComboBox.ItemTemplate>
-            </ComboBox>
-        </StackPanel>
+        
+        <materialDesign:DialogHost Identifier="RootDialog"
+                                   HorizontalAlignment="Stretch"
+                                   VerticalAlignment="Stretch"
+                                   Grid.ColumnSpan="6"
+                                   Grid.RowSpan="2">
+            <materialDesign:PopupBox StaysOpen="True"
+                                     VerticalAlignment="Top"
+                                     HorizontalAlignment="Right"
+                                     Margin="0,10,10,0">
+                <StackPanel Width="200"
+                            Height="400">
+                    <TextBlock x:Name="userBox"
+                               Margin="2,3" />
+                    <Button Content="Stats"
+                            Click="StatsPopupButton_OnClick" />
+                    <Button Content="Options"
+                            Click="MenuPopupButton_OnClick" />
+                    <Button Content="Logout"
+                            Click="LogoutPopupButton_OnClick" />
+                </StackPanel>
+            </materialDesign:PopupBox>
+        </materialDesign:DialogHost>
+        
         <TextBox x:Name="bgBox"
+                 x:FieldModifier="public"
                  TextWrapping="Wrap"
                  Panel.ZIndex="-1"
-                 Grid.ColumnSpan="5"
+                 Grid.ColumnSpan="6"
                  Grid.Column="0"
                  HorizontalAlignment="Stretch"
                  Grid.RowSpan="2"
@@ -157,4 +145,5 @@
                  IsEnabled="False" />
 
     </Grid>
+
 </Window>

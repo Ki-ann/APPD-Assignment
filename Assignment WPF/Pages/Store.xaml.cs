@@ -40,7 +40,7 @@ namespace Assignment_WPF.Pages
                 for (int x = 0; x < _buttonCount / 2; x++)          //no.of rows of same width to define
                 {
                     RowDefinition rowDef = new RowDefinition();
-                    rowDef.Height = new GridLength((sp.Height / 2)-1);
+                    rowDef.Height = new GridLength((sp.Height / 2));
                     btnGrid.RowDefinitions.Add(rowDef);
                 }
                 int _buttonNo = 0;                                  //Button tag
